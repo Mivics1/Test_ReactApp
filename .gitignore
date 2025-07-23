@@ -1,0 +1,18 @@
+# Node-related
+**/node_modules/
+**/dist/
+**/build/
+**/.env
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/

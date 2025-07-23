@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test mocha --require @babel/register '*.test.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/register": "^7.15.3",
+    "bcryptjs": "^3.0.2",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "mocha": "^9.1.1",
+    "supertest": "^6.1.6"
+  }
+}
