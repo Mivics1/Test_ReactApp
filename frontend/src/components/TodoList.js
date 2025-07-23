@@ -5,6 +5,8 @@ function TodoList({ token }) {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState('');
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -22,6 +24,29 @@ function TodoList({ token }) {
 
     fetchTodos();
   }, [token]);
+
+  const handleEdit = (todo) => {
+  setEditingId(todo.id);
+  setEditText(todo.title);
+  };
+
+  const handleUpdate = async (id) => {
+    try {
+      await axios.put(
+        `/api/todos/${id}`,
+        { title: editText },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setEditingId(null);
+      // Either refresh or update local state
+      const updatedTodos = todos.map(todo => 
+        todo.id === id ? { ...todo, title: editText } : todo
+      );
+      setTodos(updatedTodos); // If you're using state for todos
+    } catch (err) {
+      console.error('Failed to update todo', err);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -56,6 +81,23 @@ function TodoList({ token }) {
       <ul>
         {todos.map(todo => (
           <li key={todo.id}>
+            {editingId === todo.id ? (
+              <>
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />
+                <button onClick={() => handleUpdate(todo.id)}>Save</button>
+              </>
+            ) : (
+              <>
+                <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                  {todo.title}
+                </span>
+                <button onClick={() => handleEdit(todo)}>Edit</button>
+              </>
+            )}
             <input
               type="checkbox"
               checked={todo.completed}
