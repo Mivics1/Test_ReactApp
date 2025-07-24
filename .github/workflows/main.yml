@@ -1,0 +1,101 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api-tests:
+    name: API Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm ci
+      
+    - name: Start backend server
+      working-directory: ./backend
+      run: npm start &
+      env:
+        JWT_SECRET: test-secret
+        PORT: 3001
+        
+    - name: Run API tests
+      working-directory: ./tests/api
+      run: |
+        npm ci
+        npm test
+
+  ui-tests:
+    name: UI Tests
+    needs: api-tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm ci
+      
+    - name: Start frontend server
+      working-directory: ./frontend
+      run: npm start &
+      
+    - name: Install Playwright
+      working-directory: ./tests/ui
+      run: |
+        npm ci
+        npx playwright install
+        
+    - name: Run UI tests
+      working-directory: ./tests/ui
+      run: npx playwright test
+      env:
+        BASE_URL: http://localhost:3000
+        API_URL: http://localhost:3001
+
+  report:
+    name: Generate Report
+    needs: [api-tests, ui-tests]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Allure
+      run: |
+        sudo apt-get install allure
+        npm install -g allure-commandline
+        
+    - name: Collect results
+      run: |
+        mkdir -p allure-results
+        cp tests/api/allure-results/* allure-results/ || true
+        cp tests/ui/allure-results/* allure-results/ || true
+        
+    - name: Generate report
+      run: |
+        allure generate allure-results --clean -o allure-report
+        allure serve allure-results
+        
+    - name: Upload report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: allure-report
