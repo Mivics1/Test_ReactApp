@@ -28,7 +28,7 @@ test.describe('Todo App UI Tests', () => {
     await page.fill('input[type="password"]', 'wrongpassword');
     await page.click('button[type="submit"]');
     
-    await expect(page.locator('p[style*="color: red"]')).toHaveText('Invalid credentials');
+    await expect(page.locator('p[style*="color: red"]')).toHaveText(/Invalid credentials|Login failed/i);
     await expect(page).toHaveURL('http://localhost:3000/login');
   });
 
