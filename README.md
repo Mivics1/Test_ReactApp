@@ -22,94 +22,28 @@ Ensure you have these installed:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-repo/todo-app.git
-cd todo-app
+git clone https://github.com/Mivics1/Test_ReactApp.git
+cd Test_ReactApp
+```
+NOTE: From Step 2 to 4, the servers runs on seperate terminal
+2. Install backend dependencies and Start server:
+```bash
+./run-backend.sh
 ```
 
-2. Install backend dependencies:
+3. Install frontend dependencies and Start server:
 ```bash
-cd backend
-npm install
-cd ..
+./frontend.sh
 ```
 
-3. Install frontend dependencies:
+4. Install test dependencies, run test and Generate Test Report:
 ```bash
-cd frontend
-npm install
-cd ..
-```
-
-4. Install test dependencies (optional):
-```bash
-cd tests/api
-npm install
-cd ../ui
-npm install
-cd ../..
-```
-
-## Running the Application
-
-### Start Backend Server
-```bash
-cd backend
-npm start
-```
-Server runs at `http://localhost:3001`
-
-### Start Frontend Development Server
-```bash
-cd frontend
-npm start
-```
-Application opens at `http://localhost:3000`
-
-## Testing
-
-### API Tests
-```bash
-cd tests/api
-npm test
-```
-
-### UI Tests
-```bash
-cd tests/ui
-npx playwright test
+./test-report.sh
 ```
 
 #### For visual debugging:
 ```bash
 npx playwright test --headed
-```
-
-## Generate Test Reports
-
-First install Allure globally:
-```bash
-npm install -g allure-commandline
-```
-
-Then generate reports:
-
-### For API tests
-```bash
-allure generate tests/api/allure-results --clean -o reports/api-report
-```
-
-### For UI tests
-```bash
-allure generate tests/ui/allure-results --clean -o reports/ui-report
-```
-
-### Combined report
-```bash
-mkdir -p reports/combined
-cp tests/api/allure-results/* reports/combined/ 2>/dev/null || :
-cp tests/ui/allure-results/* reports/combined/ 2>/dev/null || :
-allure generate reports/combined --clean -o reports/full-report
-allure open reports/full-report
 ```
 
 ## Project Structure
@@ -127,11 +61,3 @@ todo-app/
     └── ui/           # UI tests (Playwright)
 ```
 
-## Environment Variables
-
-Create `.env` file in `backend/`:
-```env
-JWT_SECRET=your_jwt_secret_key_here
-PORT=3001
-DB_URI=mongodb://localhost:27017/todo-dev
-```
