@@ -2,15 +2,6 @@
 
 A full-stack Todo application with React frontend, Node.js backend, and comprehensive testing.
 
-## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [Testing](#testing)
-- [Project Structure](#project-structure)
-- [Environment Variables](#environment-variables)
-- [Troubleshooting](#troubleshooting)
-
 ## Prerequisites
 
 Ensure you have these installed:
