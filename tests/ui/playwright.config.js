@@ -1,4 +1,7 @@
-module.exports = {
+const { defineConfig } = require('@playwright/test');
+
+
+module.exports = defineConfig({
   testDir: './',
   timeout: 30000,
   expect: {
@@ -8,7 +11,16 @@ module.exports = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'list',
+  reporter: [
+    ['list'],
+    ['allure-playwright', {
+      detail: true,
+      outputFolder: 'allure-results',
+      suiteTitle: false
+    }],
+    ['html', { outputFolder: 'reports/playwright-html' }],
+    ['junit', { outputFile: 'reports/junit/ui-results.xml' }]
+  ],
   use: {
     actionTimeout: 0,
     trace: 'on-first-retry',
@@ -20,4 +32,4 @@ module.exports = {
       use: { channel: 'chrome' },
     }
   ]
-};
+});

@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="5" failures="0" skipped="0" errors="0" time="5.084598">
+<testsuite name="todo-app.spec.js" timestamp="2025-07-23T23:46:10.359Z" hostname="chromium" tests="5" failures="0" skipped="0" time="2.13" errors="0">
+<testcase name="Todo App UI Tests › should fail login with invalid credentials" classname="todo-app.spec.js" time="0.54">
+</testcase>
+<testcase name="Todo App UI Tests › should login successfully with valid credentials" classname="todo-app.spec.js" time="0.85">
+</testcase>
+<testcase name="Todo App UI Tests › should create a new todo item" classname="todo-app.spec.js" time="0.65">
+</testcase>
+<testcase name="Todo App UI Tests › should delete a todo item" classname="todo-app.spec.js" time="0.056">
+</testcase>
+<testcase name="Todo App UI Tests › should display all expected UI elements after actions" classname="todo-app.spec.js" time="0.034">
+</testcase>
+</testsuite>
+</testsuites>

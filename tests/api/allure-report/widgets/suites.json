@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"5139f0a35f75658f10855ab832db2315","name":"Todo API","statistic":{"failed":0,"broken":0,"skipped":0,"passed":9,"unknown":0,"total":9}},{"uid":"b6e313e7b646733ec2ee7a572e7ec5a7","name":"Authentication API","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}
