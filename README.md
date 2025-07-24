@@ -25,7 +25,7 @@ NOTE: From Step 2 to 4, the servers runs on seperate terminal
 
 3. Install frontend dependencies and Start server, From project root (Test_ReactApp/):
 ```bash
-./frontend.sh
+./run-frontend.sh
 ```
 
 4. Install test dependencies, run test and Generate Test Report, From project root (Test_ReactApp/):
