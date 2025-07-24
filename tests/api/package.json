@@ -15,6 +15,7 @@
     "@playwright/test": "^1.54.1",
     "allure-playwright": "^3.3.2",
     "bcryptjs": "^3.0.2",
+    "allure-mocha": "^2.0.0",
     "chai": "^4.3.4",
     "cross-env": "^7.0.3",
     "jsonwebtoken": "^9.0.2",
